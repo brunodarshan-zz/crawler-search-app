@@ -18,5 +18,14 @@
         </label>
         <input type="submit" value="Search">
     </form>
+    <hr/>
+    <h4>Last Searchies</h4>
+    <ol>
+        {% for search in searchies %}
+            <li>
+                {{ search }}
+            </li>
+        {% endfor %}
+    </ol>
 </body>
 </html>
