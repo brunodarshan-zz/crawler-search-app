@@ -34,14 +34,6 @@ class SearchService:
     def status(self):
         return str(len(self.store)) +  " resultados para " + self.query
     
-    def create_view(self):
-        fl = open('index.html', '+w')
-        fl.write('<body style="width: 100%; height: 100%";>\n')
-        fl.write('<pre style="background:#ddd; margin: 5%; padding: 2em;">\n')
-        for data in self.store:
-            fl.write(str(data['content']) + "\n\r")
-        fl.write('</pre>\n')
-        fl.write('</body>')
 
     
     
