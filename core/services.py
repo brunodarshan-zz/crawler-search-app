@@ -4,7 +4,7 @@ import os
 
 TAGS = "a h1 h2 h3 h4 h5 h6 p"
 
-class SerchService:
+class SearchService:
     def __init__(self, source, deep = 0):
         self.store = []
         self.deep = deep
@@ -22,7 +22,7 @@ class SerchService:
             self.deep -= 1
     
     def search_on_tags(self, html):
-        for tag in self.TAGS.split():
+        for tag in TAGS.split():
            result_for_tag = html.find_all(tag)
            for result in result_for_tag:
                if self.query in result.get_text():
