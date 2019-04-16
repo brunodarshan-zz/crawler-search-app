@@ -15,8 +15,6 @@ def index(request):
 def search(request):
     response = None
     if request.GET['source'] != None and request.GET['q'] != None:
-        register_search = Search(source=request.GET['source'], query=request.GET['q'])
-        register_search.save()
 
         service = SearchService(request.GET['source'])
         service.search(request.GET['q'])

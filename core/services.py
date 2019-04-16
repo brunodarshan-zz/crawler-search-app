@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 import os
 
+from core.models import Search, Tag
+
 TAGS = "a h1 h2 h3 h4 h5 h6 p"
 
 class SearchService:
@@ -9,6 +11,8 @@ class SearchService:
         self.store = []
         self.deep = deep
         self.source = source
+        self.search = Search(self.source, self.query)
+        self.search.save()
 
     def search(self, query):
         self.query = query
@@ -30,6 +34,11 @@ class SearchService:
                        "content": result.get_text,
                        "href": result.get('href')
                    })
+
+    def save_all_tags_on_database(self):
+        for tag in self.store:
+            tag = Tag(content = tag['content'], href = tag['href'], search = self.search)
+            tag.save()
 
     def status(self):
         return str(len(self.store)) +  " resultados para " + self.query
