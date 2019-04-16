@@ -4,15 +4,24 @@ from django.template import loader
 
 from core.services import SearchService
 
+from core.models import Search
+
 def index(request):
     template = loader.get_template('search.html')
-    return HttpResponse(template.render({},request))
+    last_searchies = Search.objects.all()
+    return render(request, 'search.html', {'searchies': last_searchies})
     
 
 def search(request):
-    service = SearchService(request.GET['source'])
-    service.search(request.GET['q'])
-    if len(service.store) <= 0:
-        return HttpResponse("A consulta retornou vazia")
-    else:
-        return HttpResponse(service.store)
+    response = "null"
+    if request.GET['source'] != None and request.GET['q'] != None:
+        register_search = Search(source=request.GET['source'], query=request.GET['q'])
+        register_search.save()
+
+        service = SearchService(request.GET['source'])
+        service.search(request.GET['q'])
+        if len(service.store) <= 0:
+            response = "A consulta retornou vazia"
+        else:
+            response = service.store
+    return HttpResponse(response)
