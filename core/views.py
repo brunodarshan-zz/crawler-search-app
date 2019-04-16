@@ -13,7 +13,7 @@ def index(request):
     
 
 def search(request):
-    response = "null"
+    response = None
     if request.GET['source'] != None and request.GET['q'] != None:
         register_search = Search(source=request.GET['source'], query=request.GET['q'])
         register_search.save()
@@ -24,4 +24,4 @@ def search(request):
             response = "A consulta retornou vazia"
         else:
             response = service.store
-    return HttpResponse(response)
+    return render(request, 'results.html', { 'results': response, 'query': request.GET['q'], 'source': request.GET['source'] })
