@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 from core import views as coreViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', coreViews.index),
-    path('q=<str:q>', coreViews.search)
+    url(r'^search/$', coreViews.search)
 ]
