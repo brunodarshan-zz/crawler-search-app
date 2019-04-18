@@ -14,7 +14,7 @@ Find the occurrecy of a term at a source provided from a url also inputed by use
 
 ## Non-functional Requiriments
 
-
+- Use the libs: requeriments and beautfulsoup.
 
 ## Contribuitors
 
